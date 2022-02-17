@@ -112,7 +112,7 @@ struct LegacyAccount {
 
 impl BorshDeserialize for Account {
     fn deserialize(buf: &mut &[u8]) -> Result<Self, io::Error> {
-        if buf.len() == std::mem::size_of::<LegacyAccount>() {
+        // if buf.len() == std::mem::size_of::<LegacyAccount>() {
             // This should only ever happen if we have pre-transition account serialized in state
             // See test_account_size
             let deserialized_account = LegacyAccount::deserialize(buf)?;
@@ -123,9 +123,9 @@ impl BorshDeserialize for Account {
                 storage_usage: deserialized_account.storage_usage,
                 version: AccountVersion::V1,
             })
-        } else {
-            unreachable!();
-        }
+        // } else {
+        //     unreachable!();
+        // }
     }
 }
 
